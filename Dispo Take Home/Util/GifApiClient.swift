@@ -7,6 +7,8 @@ struct GifAPIClient {
   var featuredGIFs: () -> AnyPublisher<[SearchResult], Never>
 }
 
+
+
 // MARK: - Live Implementation
 
 extension GifAPIClient {
