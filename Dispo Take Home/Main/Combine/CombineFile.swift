@@ -16,10 +16,6 @@ class CombineFile {
     
     var subscription = Set<AnyCancellable>()
     
-    var gifImg = PassthroughSubject<UIImage?, Never>()
-    
-    //image URL Fetching
-    
-    
+    var gifImg = PassthroughSubject<GifInfo, Never>()
     
 }

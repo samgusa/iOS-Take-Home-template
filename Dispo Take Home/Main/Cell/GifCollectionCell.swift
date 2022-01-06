@@ -28,6 +28,7 @@ class GifCollectionCell: UICollectionViewCell {
        let stck = UIStackView()
         stck.axis = .horizontal
         stck.distribution = .fillProportionally
+        stck.spacing = 10
         stck.translatesAutoresizingMaskIntoConstraints = false
         return stck
     }()
@@ -44,7 +45,9 @@ class GifCollectionCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             contentStackView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
             contentStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            contentStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10)
+            contentStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+            imgView.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 0.8),
+            imgView.widthAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 0.8)
         
         ])
         

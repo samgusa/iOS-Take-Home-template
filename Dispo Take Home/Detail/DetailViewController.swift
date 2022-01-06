@@ -2,6 +2,8 @@ import Combine
 import UIKit
 
 class DetailViewController: UIViewController {
+    
+    
   init(searchResult: SearchResult) {
     super.init(nibName: nil, bundle: nil)
   }

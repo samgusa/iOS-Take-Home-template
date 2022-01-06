@@ -1,12 +1,10 @@
 import Combine
 import UIKit
-import Kingfisher
 
 class MainViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private let searchTextChangedSubject = PassthroughSubject<String, Never>()
-    private let cellPressedPublisher = PassthroughSubject<SearchResult, Never>()
-    private let loadGifData = PassthroughSubject<String, Never>()
+    let cellPressedPublisher = PassthroughSubject<SearchResult, Never>()
     
     
     var arr = [SearchResult]()
@@ -49,7 +47,8 @@ class MainViewController: UIViewController {
         pushDetailView
             .sink { [weak self] result in
                 guard let self = self else { return }
-                
+                let vc = DetailViewController(searchResult: result)
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             .store(in: &cancellables)
         
@@ -97,24 +96,5 @@ class MainViewController: UIViewController {
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTextChangedSubject.send(searchText)
-    }
-}
-
-extension UIImageView {
-    func getImg(url: URL) {
-        self.kf.indicatorType = .none
-        self.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"),
-                         options: [
-                            .cacheOriginalImage,
-                            .forceTransition
-                         ], completionHandler: {
-                            result in
-                            switch result {
-                            case .success(_):
-                                print("success")
-                            case .failure(let error):
-                                print("Error \(error)")
-                            }
-                         })
     }
 }
