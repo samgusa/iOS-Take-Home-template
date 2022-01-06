@@ -1,5 +1,6 @@
 import Combine
 import UIKit
+import Kingfisher
 
 class MainViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
@@ -18,6 +19,8 @@ class MainViewController: UIViewController {
         collectionView.register(GifCollectionCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.backgroundColor = .clear
         collectionView.keyboardDismissMode = .onDrag
+        collectionView.delegate = self
+        collectionView.dataSource = self
         return collectionView
     }()
     
@@ -58,6 +61,7 @@ class MainViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        
     }
     
     override func loadView() {
@@ -68,6 +72,7 @@ class MainViewController: UIViewController {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+        
     }
     
     private lazy var searchBar: UISearchBar = {
@@ -84,6 +89,7 @@ class MainViewController: UIViewController {
     }
     
     
+    
 }
 
 // MARK: UISearchBarDelegate
@@ -91,5 +97,24 @@ class MainViewController: UIViewController {
 extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTextChangedSubject.send(searchText)
+    }
+}
+
+extension UIImageView {
+    func getImg(url: URL) {
+        self.kf.indicatorType = .none
+        self.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"),
+                         options: [
+                            .cacheOriginalImage,
+                            .forceTransition
+                         ], completionHandler: {
+                            result in
+                            switch result {
+                            case .success(_):
+                                print("success")
+                            case .failure(let error):
+                                print("Error \(error)")
+                            }
+                         })
     }
 }

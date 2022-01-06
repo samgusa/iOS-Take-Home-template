@@ -6,14 +6,20 @@
 //
 
 import Foundation
+import UIKit
 import Combine
 
 
 class CombineFile {
     
-    var subscriber = Set<AnyCancellable>()
+    static var shared = CombineFile()
     
-    var gifData = PassthroughSubject<String, Never>()
+    var subscription = Set<AnyCancellable>()
+    
+    var gifImg = PassthroughSubject<UIImage?, Never>()
+    
+    //image URL Fetching
+    
     
     
 }

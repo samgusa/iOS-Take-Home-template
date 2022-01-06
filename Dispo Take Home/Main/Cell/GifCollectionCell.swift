@@ -38,6 +38,8 @@ class GifCollectionCell: UICollectionViewCell {
         contentStackView.addArrangedSubview(gifTitle)
         contentView.addSubview(contentStackView)
         
+        
+        
         //TODO: change to snapkit later
         NSLayoutConstraint.activate([
             contentStackView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
