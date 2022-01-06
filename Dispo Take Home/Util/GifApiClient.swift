@@ -36,7 +36,7 @@ extension GifAPIClient {
                                gifUrl: response.gifData.images.fixed_height.url,
                                text: response.gifData.title,
                                shares: 0,
-                               //backgroundColor: nil,
+                               backgroundColor: nil,
                                tags: [])
             }
             .replaceError(with:
@@ -44,7 +44,7 @@ extension GifAPIClient {
                         gifUrl: URL(fileURLWithPath: ""),
                         text: "Error Occurred",
                         shares: 0,
-                        //backgroundColor: nil,
+                        backgroundColor: nil,
                         tags: [])
             )
             .share()

@@ -33,11 +33,12 @@ class MainViewController: UIViewController {
         ) = mainViewModel(
             cellTapped: cellPressedPublisher.eraseToAnyPublisher(), // replace
             searchText: searchTextChangedSubject.eraseToAnyPublisher(),
-            viewWillAppear: Empty().eraseToAnyPublisher() // replace
+            viewWillAppear: Empty().eraseToAnyPublisher()
         )
         
         loadResults
             .sink { [weak self] results in
+                print("loadResults \(results)")
                 guard let self = self else { return }
                 self.arr = results
                 self.collectionView.reloadData()
@@ -53,14 +54,13 @@ class MainViewController: UIViewController {
             .store(in: &cancellables)
         
         showMainResults
-            .sink { [weak self] (result) in
+            .sink { [weak self] result in
+                print("Main \(result)")
                 guard let self = self else { return }
                 self.arr = result
                 self.collectionView.reloadData()
             }
             .store(in: &cancellables)
-        
-        
     }
     
     override func loadView() {

@@ -19,8 +19,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? GifCollectionCell else {
             fatalError()
         }
-        cell.gifTitle.text = arr[indexPath.row].title
-        cell.imgView.getImg(url: arr[indexPath.row].gifUrl)
+        
+        var gifData = arr[indexPath.row]
+        cell.gifTitle.text = gifData.title
+        cell.imgView.getImg(url: gifData.gifUrl)
         
         return cell
     }

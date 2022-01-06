@@ -17,15 +17,21 @@ func mainViewModel(
         .switchToLatest()
     
     //main results that appear.
-    let mainResults = api.featuredGIFs
+    let mainResults = api.featuredGIFs()
     
     
     // show featured gifs when there is no search query, otherwise show search results
-    let loadResults = searchResults
-        .eraseToAnyPublisher()
+    let loadResults = mainResults.combineLatest(searchResults).compactMap { (main, search) -> [SearchResult] in
+        if search.isEmpty {
+            return main
+        } else {
+            return search
+        }
+    }
+    .eraseToAnyPublisher()
     
     //show main results
-    let showMainResults = mainResults()
+    let showMainResults = mainResults
         .eraseToAnyPublisher()
     
     //renamed pushDetailView. What happens when cell pressed
