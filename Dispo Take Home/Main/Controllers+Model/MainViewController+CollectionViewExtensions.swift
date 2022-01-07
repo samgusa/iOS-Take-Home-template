@@ -20,7 +20,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             fatalError()
         }
         
-        var gifData = arr[indexPath.row]
+        let gifData = arr[indexPath.row]
         cell.gifTitle.text = gifData.title
         cell.imgView.getImg(url: gifData.gifUrl)
         
@@ -34,6 +34,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //this causes the view to appear when sent.
         cellPressedPublisher.send(arr[indexPath.row])
     }
     

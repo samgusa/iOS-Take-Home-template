@@ -19,6 +19,7 @@ class GifCollectionCell: UICollectionViewCell {
     var gifTitle: UILabel = {
        let txt = UILabel()
         txt.text = "No Title available"
+        txt.textColor = .label
         txt.numberOfLines = 0
         txt.translatesAutoresizingMaskIntoConstraints = false
         return txt
@@ -39,17 +40,16 @@ class GifCollectionCell: UICollectionViewCell {
         contentStackView.addArrangedSubview(gifTitle)
         contentView.addSubview(contentStackView)
         
-        
-        
-        //TODO: change to snapkit later
-        NSLayoutConstraint.activate([
-            contentStackView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            contentStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            contentStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
-            imgView.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 0.8),
-            imgView.widthAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 0.8)
-        
-        ])
+        contentStackView.snp.makeConstraints { (view) in
+            view.left.equalTo(10)
+            view.right.equalTo(10)
+        }
+    
+        imgView.snp.makeConstraints { (img) in
+            img.height.equalTo(contentView.frame.height * 0.80)
+            img.width.equalTo(contentView.frame.height * 0.95)
+            
+        }
         
     }
     

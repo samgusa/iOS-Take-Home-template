@@ -33,12 +33,11 @@ class MainViewController: UIViewController {
         ) = mainViewModel(
             cellTapped: cellPressedPublisher.eraseToAnyPublisher(), // replace
             searchText: searchTextChangedSubject.eraseToAnyPublisher(),
-            viewWillAppear: Empty().eraseToAnyPublisher()
+            viewWillAppear: Empty().eraseToAnyPublisher() // replace not sure why here.
         )
         
         loadResults
             .sink { [weak self] results in
-                print("loadResults \(results)")
                 guard let self = self else { return }
                 self.arr = results
                 self.collectionView.reloadData()
@@ -54,8 +53,7 @@ class MainViewController: UIViewController {
             .store(in: &cancellables)
         
         showMainResults
-            .sink { [weak self] result in
-                print("Main \(result)")
+            .sink { [weak self] (result) in
                 guard let self = self else { return }
                 self.arr = result
                 self.collectionView.reloadData()
@@ -86,9 +84,6 @@ class MainViewController: UIViewController {
         let colLayout = UICollectionViewFlowLayout()
         return colLayout
     }
-    
-    
-    
 }
 
 // MARK: UISearchBarDelegate

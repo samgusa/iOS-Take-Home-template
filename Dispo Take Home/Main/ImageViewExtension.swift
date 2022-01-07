@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import Kingfisher
 
+
+//for getting the animated gif
 extension UIImageView {
     func getImg(url: URL) {
         self.kf.indicatorType = .none
